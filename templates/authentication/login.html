@@ -1,0 +1,84 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="card mt-5">
+
+
+      <div class="card-body">
+        <div class="card-title py-3">
+          <h3>Login</h3>
+        </div>
+       
+
+<ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+      aria-controls="pills-login" aria-selected="true">Login</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="{% url 'register' %}" role="tab"
+      aria-controls="pills-register" aria-selected="false">Register</a>
+  </li>
+</ul>
+<!-- Pills navs -->
+
+<!-- Pills content -->
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+    <form action="{% url 'login' %}" method="post">
+      {% csrf_token %}
+
+      {% include 'partials/_messages.html' %}
+ 
+      <!-- Username input -->
+      <div class="form-outline mb-4">
+        <input type="text" name="username"
+        placeholder="username"
+        id="usernameField" value="{{fieldValues.username}}" 
+        for="loginName" class="form-control" />
+ 
+      </div>
+
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <input type="password" class="form-control"
+          id="passwordField" name="password" placeholder="password"/>
+      </div>
+
+      <!-- 2 column grid layout -->
+      <div class="row mb-3">
+
+        <div class="col-md-6 d-flex justify-content-start">
+          <a href="{% url 'reset-password' %}">Forgot password?</a>
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block mb-4 submit-btn">Sign in</button>
+
+      <!-- Register buttons -->
+      <div class="text-center">
+        <p>Not a member? <a href="{% url 'register' %}">Register</a></p>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+      </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+
+{% endblock content %}

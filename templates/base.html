@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Keep track of your expences" />
+    <meta name="author" content="BERKAY ALATAS" />
+
+    <title>Payment Dashboard {% block title %} {% endblock %}</title>
+
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.1/examples/dashboard/"
+    />
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet" />
+    <link href="{% static 'css/main.css'%}" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet" />
+    <link />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+      integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <header
+      class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
+    >
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-4" href="#">
+        Payment Dashboard
+      </a>
+
+      <ul
+        class="navbar-nav px-3"
+        style="display: flex; flex-direction: row; align-items: center"
+      >
+        <li class="nav-item text-nowrap">
+          <span
+            style="font-size: 14px"
+            class="badge mt-2 badge-pill badge-secondary"
+            href=""
+          >
+            Welcome {{request.user.username}}
+          </span>
+        </li>
+
+        <li class="nav-item text-nowrap mt-3 ml-2">
+          <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="input" class="btn btn-danger mb-1" type="submit">
+              Sign out
+            </button>
+          </form>
+        </li>
+      </ul>
+    </header>
+
+    <div class="container">
+      <div class="row">
+        {% include 'partials/_sidebar.html' %}
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          {% block content %} {% endblock %}
+        </main>
+      </div>
+    </div>
+
+    <script
+      src="/docs/5.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+      integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- <script
+      src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+      integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+      crossorigin="anonymous"
+    ></script> -->
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

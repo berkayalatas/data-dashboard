@@ -1,0 +1,71 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="card mt-5">
+
+      <div class="card-body">
+        <div class="card-title py-3">
+          <h3>Register </h3>
+        </div>
+        <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="tab-login" data-mdb-toggle="pill" href="{% url 'login' %}" role="tab"
+              aria-controls="pills-login" aria-selected="true">Login</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="tab-register" data-mdb-toggle="pill" href="{% url 'register' %}" role="tab"
+              aria-controls="pills-register" aria-selected="false">Register</a>
+          </li>
+        </ul>
+        <form action="{% url 'register' %}" method="post">
+          {% csrf_token %}
+
+          {% include 'partials/_messages.html' %}
+
+          <!-- Username input -->
+          <div class="form-outline mb-4">
+            <input type="text" name="username" placeholder="username" id="usernameField"
+              value="{{fieldValues.username}}" class="form-control form-control-sm" />
+            <div class="invalid_feedback invalid-feedback pl-3" style="display:none">
+            </div>
+          </div>
+          <p class="text-sm text-success usernameSuccessOutput"></p>
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input type="email" name="email" placeholder="Email" class="form-control form-control-sm" id="emailField"
+              value="{{fieldValues.email}}" />
+            <div class="emailFeedBackArea invalid-feedback" style="display:none">
+            </div>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+            <input type="password" name="password" placeholder="Password" class="form-control form-control-sm"
+              id="passwordField" />
+            <span class="badge rounded-pill bg-success text-light m-2 p-2 showPasswordToggle">Show Password</span>
+
+          </div>
+
+
+          <!-- Submit button -->
+          <button type="submit" value="Register" class="btn btn-primary btn-block submit-btn mb-3">Register</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="col-md-4"></div>
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+
+{% endblock content %}
