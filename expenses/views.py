@@ -9,7 +9,6 @@ import json
 from django.http import JsonResponse, HttpResponse
 import datetime
 import csv
-import os
 import xlwt
 
 @login_required(login_url='/authentication/login')
@@ -169,7 +168,7 @@ def expense_category_summary(request):
     and deserialization is its inverse operation (convert string -> object).
 """
 
-def stats_view(request):
+def expense_stats_view(request):
     return render(request, 'expenses/stats.html')
 
 

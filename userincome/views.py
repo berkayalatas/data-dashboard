@@ -1,3 +1,4 @@
+import pdb
 from django.shortcuts import render, redirect
 from .models import Source, UserIncome
 from django.core.paginator import Paginator
@@ -6,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 import json
 from django.http import JsonResponse
-
+import datetime
 
 def search_income(request):
     if request.method == 'POST':
@@ -111,3 +112,44 @@ def delete_income(request, id):
     income.delete()
     messages.success(request, 'record removed')
     return redirect('income')
+
+
+   
+def income_source_summary(request):
+    earnings = UserIncome.objects.filter(owner = request.user) #gte stands for 'greater than or equal', lte stands for 'lower than or equal' 
+    final = {}
+    
+    def get_source_names(source):
+        return source
+    
+    #set removes the dupliced categories
+    source_list =list(set(map(get_source_names, earnings)))
+ 
+    
+    def get_earning_amount(source):
+        amount = 0
+        filtered_by_source = earnings.filter(source=source)
+        
+        #update amount
+        for item in filtered_by_source:
+            amount += item.amount
+        return amount
+        
+
+    for x in earnings:
+        for y in source_list: #key-- value
+            final[str(y)] = get_earning_amount(y)
+            
+    #pdb.set_trace()
+    return JsonResponse({'income_source_data' : final} , safe= False)    
+   
+""" JsonResponse’s first parameter, data, should be a dict instance. To pass any other 
+    JSON-serializable object you must set the safe parameter to False.
+
+    JSON is a format that encodes objects in a string. Serialization means to convert an object into that string, 
+    and deserialization is its inverse operation (convert string -> object).
+"""
+
+
+def income_stats_view(request):
+    return render(request, 'income/stats.html')

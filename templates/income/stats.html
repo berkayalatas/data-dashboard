@@ -8,7 +8,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="">Expenses Summary</a>
+            <a href="">Income Summary</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">Summary</li>
         </ol>
@@ -16,20 +16,20 @@
     </div>
 
     <div class="col-md-4">
-      <a href="{% url 'add-expenses'%}" class="btn btn-primary">Add new expense</a>
+      <a href="{% url 'add-income'%}" class="btn btn-primary">Add new income</a>
     </div>
   </div>
 
   <div class="row m-2">
     <div class="col-md-6">
       <div style="width: 80%; height: 80%;">
-        <canvas id="pieChart"></canvas>
+        <canvas id="incomePieChart"></canvas>
       </div>
     </div>
 
     <div class="col-md-6">
       <div>
-        <canvas id="barChart"></canvas>
+        <canvas id="incomeBarChart"></canvas>
       </div>
     </div>
   </div>
@@ -38,18 +38,18 @@
  
       <div class="col-md-6">
         <div>
-          <canvas id="lineChart"></canvas>
+          <canvas id="incomeLineChart"></canvas>
         </div>
       </div>
   
     <div class="col-md-6">
       <div  style="width: 80%; height: 80%;">
-        <canvas id="polarChart"></canvas>
+        <canvas id="incomePolarChart"></canvas>
       </div>
     </div>
   </div>
 </div>
 
-<script src="{% static 'js/expenseStats.js' %}"></script>
+<script src="{% static 'js/incomeStats.js' %}"></script>
 
 {% endblock content %}
