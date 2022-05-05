@@ -130,7 +130,7 @@ const getChartData = () => {
     fetch('/expense_category_summary').then((res) => res.json()).then((result) => {
         //console.log(result);
         const category_data = result.expense_category_data
-        const [labels, data] = [Object.keys(category_data), Object.values(category_data) ]
+        const [labels, data] = [Object.keys(category_data), Object.values(category_data)]
         console.log(data, labels)
         renderPieChart(data, labels);
         renderBarChart(data, labels);
@@ -138,5 +138,6 @@ const getChartData = () => {
         renderPolarChart(data, labels);
     })
 }
+
 
 document.onload = getChartData();
