@@ -18,6 +18,7 @@ from django.urls import path, include
  
 urlpatterns = [
     path('', include('expenses.urls')),
+    path('predictor/', include('predictor.urls')),
     path('similarity/', include('similarities.urls')),
     path('income/', include('userincome.urls')),
     path('authentication/', include('authentication.urls')),

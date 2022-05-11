@@ -13,6 +13,8 @@ validate-email = "*"
 six = "*"
 xlwt = "*"
 weasyprint = "*"
+sklearn = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 
