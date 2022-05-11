@@ -3,14 +3,17 @@ const getExpenseAndIncomeData = () => {
     fetch('/expense_category_summary').then((res) => res.json()).then((result) => {
         const category_data = result.expense_category_data;
         const expenseDataArr = Object.values(category_data);
+        //console.log(expenseDataArr)
         localStorage.setItem('expenseData', JSON.stringify(expenseDataArr)); //save to localStorage
     })
     /* Fetch Income Data */
     fetch('/income/income_source_summary').then((res) => res.json()).then((result) => {
         const category_data = result.income_source_data;
         const incomeDataArr = Object.values(category_data);
+        //console.log(incomeDataArr)
         localStorage.setItem('incomeData', JSON.stringify(incomeDataArr)); //save to localStorage
     })
+ 
 }
 var expenseData = JSON.parse(localStorage.getItem('expenseData'))
 var incomeData = JSON.parse(localStorage.getItem('incomeData'))
@@ -20,7 +23,7 @@ var incomeData = JSON.parse(localStorage.getItem('incomeData'))
 /* Expense Table */
 function createExpenseTable(expenseData) {
     let counter = 0;
-    for (let i = 0; i < expenseData.length; i++) {
+    for (let i = 0; i < expenseData?.length; i++) {
         document.getElementById('expense').innerHTML += (`          
             <tr>
                 <th scope="row">${++counter}</th>
@@ -32,7 +35,7 @@ function createExpenseTable(expenseData) {
 /* Income  Table */
 function createIncomeTable(incomeData) {
     let counter = 0;
-    for (let i = 0; i < incomeData.length; i++) {
+    for (let i = 0; i < incomeData?.length; i++) {
         document.getElementById('income').innerHTML += (`          
             <tr>
                 <th scope="row">${++counter}</th>
@@ -148,7 +151,15 @@ function eucDistance(expenseData, incomeData) {
     document.getElementById('eucDistance').innerHTML = (`Euclidean Distance: <b>${(eucDistance).toFixed(2)}</b> `)    
 }
 
-//expense functions
+//fetch expense and income data
+
+
+ 
+getExpenseAndIncomeData();
+
+ 
+setTimeout(() =>{
+    //expense functions
 createExpenseTable(expenseData);
 getExpenseMean(expenseData);
 getExpenseVariance(expenseData);
@@ -160,12 +171,11 @@ getIncomeMean(incomeData);
 getIncomeVariance(incomeData);
 getIncomeStd(incomeData);
 
-//fetch expense and income data
-getExpenseAndIncomeData();
-
 
 covariance(expenseData, incomeData);
 correlation(expenseData, incomeData);
 cosinesim(expenseData, incomeData);
 manhattanDistance(expenseData, incomeData);
 eucDistance(expenseData, incomeData);
+})
+
